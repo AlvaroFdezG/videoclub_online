@@ -30,7 +30,7 @@ function createTables()
         id INT AUTO_INCREMENT PRIMARY KEY,
         nombre VARCHAR(100) NOT NULL,
         apellidos VARCHAR(100) NOT NULL,
-        fotografía VARCHAR(50) NOT NULL";
+        fotografía VARCHAR(50) NOT NULL)";
 
         $peliculas = "CREATE TABLE IF NOT EXISTS peliculas(
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -38,18 +38,18 @@ function createTables()
         genero VARCHAR(50) NOT NULL,
         pais VARCHAR(50) NOT NULL,
         anyo INT NOT NULL,
-        cartel VARCHAR(255) NOT NULL";
+        cartel VARCHAR(255) NOT NULL)";
 
         $actuan = "CREATE TABLE IF NOT EXISTS actuan (
         id_pelicula INT NOT NULL,
         id_actor INT NOT NULL,
-        PRIMARY KEY (id_pelicula, id_actor)";
+        PRIMARY KEY (id_pelicula, id_actor))";
 
         $usuarios = "CREATE TABLE IF NOT EXISTS usuarios (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        username VARCHAR(100) NOT NULL,
+        username VARCHAR(100) NOT NULL UNIQUE,
         password VARCHAR(100) NOT NULL,
-        rol VARCHAR(100) DEFAULT ('Por revisar')";
+        rol VARCHAR(100) DEFAULT ('Por revisar'))";
 
         $bd->exec($peliculas);
         $bd->exec($actores);
@@ -59,5 +59,48 @@ function createTables()
         $bd = null;
     } catch (PDOException $e) {
         echo 'Error en la base de datos: ' . $e->getMessage();
+    }
+}
+function login($userName, $password)
+{
+    $conex = "mysql:host=127.0.0.1;dbname=videoclub";
+    $user = "root";
+    $pass = "";
+
+    try {
+        $bd = new PDO($conex, $user, $pass);
+        $userLogin = $bd->prepare("SELECT * FROM usuarios WHERE username=:username AND password=:pass");
+        $userLogin->execute([":username" => $userName, ":pass" => $password]);
+        if ($userLogin->rowCount() == 1) {
+            $userData =  $userLogin->fetch(PDO::FETCH_ASSOC);
+            return $userData;
+        } else {
+            return false;
+        }
+
+        $bd = null;
+    } catch (PDOException $e) {
+        echo '<p class="error-message">Error en la base de datos: <strong>' . $e->getMessage() . '</strong></p>';
+    }
+}
+function listarPelis()
+{
+    $conex = "mysql:host=127.0.0.1;dbname=videoclub";
+    $user = "root";
+    $pass = "";
+
+    try {
+        $bd = new PDO($conex, $user, $pass);
+        $userLogin = $bd->prepare("SELECT * FROM peliculas");
+        if ($userLogin->rowCount() == 1) {
+            $userData =  $userLogin->fetch(PDO::FETCH_ASSOC);
+            return $userData;
+        } else {
+            return false;
+        }
+
+        $bd = null;
+    } catch (PDOException $e) {
+        echo '<p class="error-message">Error en la base de datos: <strong>' . $e->getMessage() . '</strong></p>';
     }
 }

@@ -1,0 +1,29 @@
+:root{
+    --primary-purple: purple;
+}
+
+.header{
+    background-color: rgb(48, 4, 88) !important;
+}
+
+.navbar-brand{
+    color: white !important;
+}
+
+body{
+    background-color: rgb(41, 41, 41) !important;
+}
+.contenedor{
+    height: 100vh;
+}
+.form__fieldset{
+    background-color: var(--primary-purple);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 600px;
+    border-radius: 20px;
+    color: white;
+}
