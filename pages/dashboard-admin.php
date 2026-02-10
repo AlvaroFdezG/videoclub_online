@@ -1,11 +1,17 @@
 <?php
 require("./../scripts/bbdd.php");
+require("./../scripts/funciones.php");
+require_once("./../classes/Actor.php");
+require_once("./../classes/Peliculas.php");
 session_start();
 
 if (!isset($_SESSION["rol"]) || $_SESSION["rol"] != 1) {
     header("Location: ./../index.php?error=true");
 }
+
+
 $listaPelis = getPelis();
+$listaPelisObj = crearPelis($listaPelis);
 
 ?>
 <!DOCTYPE html>
@@ -29,7 +35,23 @@ $listaPelis = getPelis();
 
         <h3>Bienvenido administrador <?php echo $_SESSION["userName"] ?></h3>
         <br>
-        <?php print_r($listaPelis) ?>
+        <section class="pelis">
+            <?php foreach ($listaPelisObj as $peli) {?>
+                <article class="pelis__peli">
+                    <img src="<?php echo $peli->getCartel() ?>" class="pelis__img" alt="">
+                    <div class="pelis__datos">
+                        <p class="pelis__title"><strong><?php echo $peli->gettitulo() ?></strong></p>
+                        <p class="pelis__genero"><?php echo $peli->getgenero() ?></p>
+                        <p class="pelis__pais"><?php echo $peli->getpais() ?></p>
+                        <p class="pelis__anyo"><?php echo $peli->getAnyo() ?></p>
+                    </div>
+                    <div class="pelis__botones">
+                        <a href="./editar.php?id_peli=<?php echo $peli->getId()?>">Editar</a>
+                        <a href="./borrar.php?id_peli=<?php echo $peli->getId()?>">Borrar</a>
+                    </div>
+                </article>
+            <?php } ?>
+        </section>
     </div>
 
 </body>

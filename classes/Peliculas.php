@@ -1,5 +1,5 @@
 <?php
-class Usuario
+class Pelicula
 {
     private $id;
     private $titulo;
@@ -7,8 +7,9 @@ class Usuario
     private $pais;
     private $anyo;
     private $cartel;
+    private $reparto;
 
-    public function __construct($id,$titulo, $genero,$pais,$anyo,$cartel)
+    public function __construct($id, $titulo, $genero, $pais, $anyo, $cartel)
     {
         $this->id = $id;
         $this->titulo = $titulo;
@@ -17,12 +18,15 @@ class Usuario
         $this->anyo = $anyo;
         $this->cartel = $cartel;
     }
-    public function __destruct()
+
+    public function getReparto()
     {
-        echo "Eliminado: " . $this->titulo;
+        return $this->reparto;
     }
-
-
+    public function addReparto(Actor $actor)
+    {
+        $this->reparto[] = $actor;
+    }
 
     /**
      * Get the value of genero
@@ -66,7 +70,7 @@ class Usuario
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -76,7 +80,7 @@ class Usuario
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -86,7 +90,7 @@ class Usuario
 
     /**
      * Get the value of pais
-     */ 
+     */
     public function getpais()
     {
         return $this->pais;
@@ -96,7 +100,7 @@ class Usuario
      * Set the value of pais
      *
      * @return  self
-     */ 
+     */
     public function setpais($pais)
     {
         $this->pais = $pais;
@@ -106,7 +110,7 @@ class Usuario
 
     /**
      * Get the value of anyo
-     */ 
+     */
     public function getAnyo()
     {
         return $this->anyo;
@@ -116,7 +120,7 @@ class Usuario
      * Set the value of anyo
      *
      * @return  self
-     */ 
+     */
     public function setAnyo($anyo)
     {
         $this->anyo = $anyo;
@@ -126,7 +130,7 @@ class Usuario
 
     /**
      * Get the value of cartel
-     */ 
+     */
     public function getCartel()
     {
         return $this->cartel;
@@ -136,7 +140,7 @@ class Usuario
      * Set the value of cartel
      *
      * @return  self
-     */ 
+     */
     public function setCartel($cartel)
     {
         $this->cartel = $cartel;

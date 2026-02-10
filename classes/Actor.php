@@ -1,5 +1,5 @@
 <?php
-class Usuario
+class Actor
 {
     private $id;
     private $nombre;

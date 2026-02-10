@@ -63,11 +63,11 @@ function createTables()
 
 
         INSERT INTO peliculas (titulo, genero, pais, anyo, cartel) VALUES
-        ('Inception', 'Ciencia ficción', 'Estados Unidos', 2010, 'inception.jpg'),
-        ('Lost in Translation', 'Drama', 'Estados Unidos', 2003, 'lost_translation.jpg'),
-        ('Fight Club', 'Drama', 'Estados Unidos', 1999, 'fight_club.jpg'),
-        ('Black Swan', 'Thriller', 'Estados Unidos', 2010, 'black_swan.jpg'),
-        ('The Dark Knight', 'Acción', 'Estados Unidos', 2008, 'dark_knight.jpg');
+        ('Inception', 'Ciencia ficción', 'Estados Unidos', 2010, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F1416%2F8662%2Fproducts%2Finception_2010_imax_original_film_art_2000x.jpg%3Fv%3D1551890318&f=1&nofb=1&ipt=e7653ef55bd5ce1e6513e0f041a54e526946e3a4148933cd7becf945392e507b'),
+        ('Lost in Translation', 'Drama', 'Estados Unidos', 2003, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fc8.alamy.com%2Fcomp%2FR59HCA%2Flost-in-translation-original-movie-poster-R59HCA.jpg&f=1&nofb=1&ipt=bcdcb98541398e1151bb7b7e2d7d67fa7f3a73551590618b677e11834a11d3fc'),
+        ('Fight Club', 'Drama', 'Estados Unidos', 1999, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.cine.com%2Fpeliculas%2F1969%2Fcartel%2F1969_cartel_orig.jpg&f=1&nofb=1&ipt=a9c8e62d77053f1c03d5f700d436ea14e7deb8522d6ca9922b4bb38af5869c83'),
+        ('Black Swan', 'Thriller', 'Estados Unidos', 2010, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpics.filmaffinity.com%2Fblack_swan-861293346-large.jpg&f=1&nofb=1&ipt=816f2429e42789f965e64f7491fe93057c25522723232ba2f20719b3af517441'),
+        ('The Dark Knight', 'Acción', 'Estados Unidos', 2008, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.themoviedb.org%2Ft%2Fp%2Foriginal%2FeP5NL7ZlGoW9tE9qnCdHpOLH1Ke.jpg&f=1&nofb=1&ipt=f0ab417e2eadcd144a1b5cd40e8af7c1b48b6f0e7c85d7b75196e0958a62f2d3');
 
         INSERT INTO actuan (id_pelicula, id_actor) VALUES
         (1, 1),
@@ -89,7 +89,7 @@ function createTables()
         $bd->exec($actores);
         $bd->exec($actuan);
         $bd->exec($usuarios);
-        $bd->exec($inserts);
+        // $bd->exec($inserts);
 
         $bd = null;
     } catch (PDOException $e) {
@@ -119,6 +119,24 @@ function login($userName, $password)
     }
 }
 function getPelis()
+{
+    $conex = "mysql:host=127.0.0.1;dbname=videoclub";
+    $user = "root";
+    $pass = "";
+
+    try {
+        $bd = new PDO($conex, $user, $pass);
+        $sql = $bd->prepare("SELECT * FROM peliculas");
+        $sql->execute();
+
+        $pelisData =  $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $pelisData;
+        $bd = null;
+    } catch (PDOException $e) {
+        echo '<p class="error-message">Error en la base de datos: <strong>' . $e->getMessage() . '</strong></p>';
+    }
+}
+function getActores()
 {
     $conex = "mysql:host=127.0.0.1;dbname=videoclub";
     $user = "root";
