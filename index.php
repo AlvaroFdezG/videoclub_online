@@ -1,9 +1,7 @@
 <?php
 require("./scripts/bbdd.php");
-
 createDB();
 createTables();
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -22,10 +20,10 @@ createTables();
         <h1 class="navbar-brand m-0 mx-3"> <i class="fa-solid fa-film"></i> Videoclub online</h1>
     </nav>
     <div class="container-md m-auto login-container d-flex align-items-center justify-content-center w-100 contenedor">
-        <form action="./pages/login.php" method="post" class="w-75">
+        <form action="./scripts/login.php" method="post" class="w-75">
             <fieldset class="form__fieldset">
+                <p class="fs-3">Videoclub Online</p>
                 <p class="form__icon"><i class="fa-solid fa-film"></i></p>
-                <p>Videoclub Online</p>
                 <div class="mb-3 w-75">
                     <label for="userName" class="form-label">Nombre de usuario</label>
                     <input required type="userName" class="form-control" name="userName" id="userName" aria-describedby="emailHelp" placeholder="Tu nombre">

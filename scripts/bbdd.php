@@ -30,7 +30,7 @@ function createTables()
         id INT AUTO_INCREMENT PRIMARY KEY,
         nombre VARCHAR(100) NOT NULL,
         apellidos VARCHAR(100) NOT NULL,
-        fotografía VARCHAR(50) NOT NULL)";
+        fotografía VARCHAR(500) NOT NULL)";
 
         $peliculas = "CREATE TABLE IF NOT EXISTS peliculas(
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -38,7 +38,7 @@ function createTables()
         genero VARCHAR(50) NOT NULL,
         pais VARCHAR(50) NOT NULL,
         anyo INT NOT NULL,
-        cartel VARCHAR(255) NOT NULL)";
+        cartel VARCHAR(500) NOT NULL)";
 
         $actuan = "CREATE TABLE IF NOT EXISTS actuan (
         id_pelicula INT NOT NULL,

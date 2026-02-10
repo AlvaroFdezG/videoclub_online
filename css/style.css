@@ -1,22 +1,27 @@
-:root{
+:root {
     --primary-purple: purple;
 }
 
-.header{
+.header {
     background-color: rgb(48, 4, 88) !important;
+    z-index: 50 !important;
 }
 
-.navbar-brand{
+.navbar-brand {
     color: white !important;
 }
-
-body{
+.form__icon{
+    font-size: 3rem;
+}
+body {
     background-color: rgb(41, 41, 41) !important;
 }
-.contenedor{
+
+.contenedor {
     height: 100vh;
 }
-.form__fieldset{
+
+.form__fieldset {
     background-color: var(--primary-purple);
     padding: 20px;
     display: flex;
@@ -27,6 +32,46 @@ body{
     border-radius: 20px;
     color: white;
 }
-.error-message{
+
+.error-message {
     color: red;
+}
+
+/* logout */
+
+.logout__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 200px;
+    background-color: rgb(48, 4, 88);
+    border-radius: 10px;
+}
+
+.logout__text {
+    font-size: 1.7rem;
+}
+
+.logout__link {
+    display: block;
+    text-align: center;
+    width: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: red;
+    color: white;
+    text-decoration: none;
+}
+
+.logout__links {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logout__link--volver {
+    background-color: red;
+    background-color: rgb(0, 92, 167);
 }

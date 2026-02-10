@@ -5,12 +5,13 @@ require_once("./../classes/Actor.php");
 require_once("./../classes/Peliculas.php");
 session_start();
 
-if (!isset($_SESSION["rol"]) || $_SESSION["rol"] != 1) {
+if (!isset($_SESSION["rol"])) {
     header("Location: ./../index.php?error=true");
 }
 
-
+// obtengo el total de las películas
 $listaPelis = getPelis();
+// le paso a la función el array y las convierto a objetos
 $listaPelisObj = crearPelis($listaPelis);
 
 ?>
@@ -28,15 +29,17 @@ $listaPelisObj = crearPelis($listaPelis);
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary position-fixed w-100 p-2 header">
-        <h1 class="navbar-brand m-0 mx-3"> <i class="fa-solid fa-film"></i> Videoclub online</h1>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary position-fixed w-100 p-2 header d-flex justify-content-between pe-md-3">
+        <h1 class="navbar-brand m-0 mx-3"><i class="fa-solid fa-film"></i> Videoclub online</h1>
+        <a href="./confirm-logout.php" class="text-decoration-none text-danger logout">Cerrar sesión <i class="fa-solid fa-right-from-bracket"></i></a>
     </nav>
     <div class="container-xl contenedor">
 
-        <h3>Bienvenido administrador <?php echo $_SESSION["userName"] ?></h3>
+        <h3>Bienvenido <?php echo $_SESSION["userName"] ?></h3>
         <br>
         <section class="pelis">
-            <?php foreach ($listaPelisObj as $peli) {?>
+            <!-- recorro el array de objetos y voy creando un article para cada uno con los datos correspondientes -->
+            <?php foreach ($listaPelisObj as $peli) { ?>
                 <article class="pelis__peli">
                     <img src="<?php echo $peli->getCartel() ?>" class="pelis__img" alt="">
                     <div class="pelis__datos">
@@ -45,10 +48,16 @@ $listaPelisObj = crearPelis($listaPelis);
                         <p class="pelis__pais"><?php echo $peli->getpais() ?></p>
                         <p class="pelis__anyo"><?php echo $peli->getAnyo() ?></p>
                     </div>
-                    <div class="pelis__botones">
-                        <a href="./editar.php?id_peli=<?php echo $peli->getId()?>">Editar</a>
-                        <a href="./borrar.php?id_peli=<?php echo $peli->getId()?>">Borrar</a>
-                    </div>
+                    <!-- solo muestro los botones de editar y borrar si el usuario es admin -->
+                    <?php if ($_SESSION["rol"] == 1) { ?>
+
+                        <!-- a los enlaces les creo una variable que paso por get con el id de la película que se está iterando -->
+                        <div class="pelis__botones">
+                            <a class="pelis__enlace" href="./editar.php?id_peli=<?php echo $peli->getId() ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a class="pelis__enlace --borrar" href="./borrar.php?id_peli=<?php echo $peli->getId() ?>"><i class="fa-solid fa-trash-can"></i></a>
+                        </div>
+
+                    <?php } ?>
                 </article>
             <?php } ?>
         </section>
