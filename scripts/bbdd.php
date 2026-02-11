@@ -89,7 +89,7 @@ function createTables()
         $bd->exec($actores);
         $bd->exec($actuan);
         $bd->exec($usuarios);
-        $bd->exec($inserts);
+        // $bd->exec($inserts);
 
         $bd = null;
     } catch (PDOException $e) {
@@ -145,6 +145,24 @@ function getActores($id_peli)
     try {
         $bd = new PDO($conex, $user, $pass);
         $sql = $bd->prepare("SELECT * FROM actores JOIN actuan ON id = id_actor WHERE id_pelicula like :id_peli");
+        $sql->execute([":id_peli" => $id_peli]);
+
+        $listaActores =  $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $listaActores;
+        $bd = null;
+    } catch (PDOException $e) {
+        echo '<p class="error-message">Error en la base de datos: <strong>' . $e->getMessage() . '</strong></p>';
+    }
+}
+function borrarPeli($id_peli)
+{
+    $conex = "mysql:host=127.0.0.1;dbname=videoclub";
+    $user = "root";
+    $pass = "";
+
+    try {
+        $bd = new PDO($conex, $user, $pass);
+        $sql = $bd->prepare("DELETE FROM peliculas WHERE id like :id_peli");
         $sql->execute([":id_peli" => $id_peli]);
 
         $listaActores =  $sql->fetchAll(PDO::FETCH_ASSOC);

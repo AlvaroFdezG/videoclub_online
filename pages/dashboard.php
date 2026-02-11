@@ -43,20 +43,33 @@ $listaPelisObj = crearPelis($listaPelis);
             <?php foreach ($listaPelisObj as $peli) { ?>
                 <article class="pelis__peli">
                     <img src="<?php echo $peli->getCartel() ?>" class="pelis__img" alt="">
-                    <div class="pelis__datos">
-                        <p class="pelis__title"><strong><?php echo $peli->gettitulo() ?></strong></p>
-                        <p class="pelis__genero"><?php echo $peli->getgenero() ?></p>
-                        <p class="pelis__pais"><?php echo $peli->getpais() ?></p>
-                        <p class="pelis__anyo"><?php echo $peli->getAnyo() ?></p>
-                        <?php print_r($peli->getReparto()) ?>
+                    <div class="pelis__info">
+                        <div class="pelis__datos">
+                            <p class="pelis__title"><strong><?php echo $peli->gettitulo() ?></strong></p>
+                            <p class="pelis__genero"><?php echo $peli->getgenero() ?></p>
+                            <p class="pelis__pais"><?php echo $peli->getpais() ?></p>
+                            <p class="pelis__anyo"><?php echo $peli->getAnyo() ?></p>
+                        </div>
+
+                        <div class="pelis__reparto">
+                            <!-- recorro el array del reparto y voy creando las tarjetas de los actores -->
+                            <?php foreach ($peli->getReparto() as $actor) { ?>
+                                <div class="reparto__card">
+                                    <img class="reparto__img" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%2Fid%2FOIP.ZTsjuGIoVev4CnQDAw9DPQHaJ3%3Fpid%3DApi&f=1&ipt=afba98d9eee27342416583a239157ce3e6b51e5fdf81a8d18d340f4524f32d43" alt="">
+                                    <p class="pelis__nombre-actor"><?php echo $actor->getnombre() ?></p>
+                                    <p><?php echo $actor->getapellidos() ?></p>
+                                </div>
+                            <?php } ?>
+                        </div>
                     </div>
+
                     <!-- solo muestro los botones de editar y borrar si el usuario es admin -->
                     <?php if ($_SESSION["rol"] == 1) { ?>
 
                         <!-- a los enlaces les creo una variable que paso por get con el id de la película que se está iterando -->
                         <div class="pelis__botones">
                             <a class="pelis__enlace" href="./editar.php?id_peli=<?php echo $peli->getId() ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a class="pelis__enlace --borrar" href="./borrar.php?id_peli=<?php echo $peli->getId() ?>"><i class="fa-solid fa-trash-can"></i></a>
+                            <a class="pelis__enlace --borrar" href="./confirm-delete.php?id_peli=<?php echo $peli->getId() ?>"><i class="fa-solid fa-trash-can"></i></a>
                         </div>
 
                     <?php } ?>
