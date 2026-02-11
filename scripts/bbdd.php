@@ -174,3 +174,38 @@ function borrarPeli($id_peli)
         echo '<p class="error-message">Error en la base de datos: <strong>' . $e->getMessage() . '</strong></p>';
     }
 }
+function allActores()
+{
+    $conex = "mysql:host=127.0.0.1;dbname=videoclub";
+    $user = "root";
+    $pass = "";
+
+    try {
+        $bd = new PDO($conex, $user, $pass);
+        $sql = $bd->prepare("SELECT * FROM actores");
+        $sql->execute();
+
+        $listaActores =  $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $listaActores;
+        $bd = null;
+    } catch (PDOException $e) {
+        echo '<p class="error-message">Error en la base de datos: <strong>' . $e->getMessage() . '</strong></p>';
+    }
+}
+function insertarPeli($titulo, $genero, $pais, $anyo, $cartel)
+{
+    $conex = "mysql:host=127.0.0.1;dbname=videoclub";
+    $user = "root";
+    $pass = "";
+
+    try {
+        $bd = new PDO($conex, $user, $pass);
+        $sql = $bd->prepare("INSERT INTO peliculas (titulo, genero, pais, anyo, cartel) VALUES
+        (':titulo', ':genero', ':pais', ':anyo', ':cartel')");
+        $sql->execute([":titulo" => $titulo, ":genero" => $genero, ":pais" => $pais, ":anyo" => $anyo, ":cartel" => $cartel]);
+
+        $bd = null;
+    } catch (PDOException $e) {
+        echo '<p class="error-message">Error en la base de datos: <strong>' . $e->getMessage() . '</strong></p>';
+    }
+}

@@ -16,7 +16,7 @@
         <h1 class="navbar-brand m-0 mx-3"> <i class="fa-solid fa-film"></i> Videoclub online</h1>
     </nav>
     <div class="container-md m-auto login-container d-flex align-items-center justify-content-center w-100 contenedor create-container">
-        <form action="./../scripts/peli-create-script.php" method="post" class="w-75">
+        <form action="./peli-create-actores.php" method="post" class="w-75">
             <fieldset class="form__fieldset">
                 <div class="mb-3 w-75">
                     <label for="peli-name" class="form-label">Título</label>
