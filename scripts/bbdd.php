@@ -43,7 +43,9 @@ function createTables()
         $actuan = "CREATE TABLE IF NOT EXISTS actuan (
         id_pelicula INT NOT NULL,
         id_actor INT NOT NULL,
-        PRIMARY KEY (id_pelicula, id_actor))";
+        PRIMARY KEY (id_pelicula, id_actor),
+        FOREIGN KEY (id_pelicula) REFERENCES peliculas(id) ON DELETE CASCADE,
+        FOREIGN KEY (id_actor) REFERENCES actores(id) ON DELETE CASCADE)";
 
         $usuarios = "CREATE TABLE IF NOT EXISTS usuarios (
         id INT AUTO_INCREMENT PRIMARY KEY,

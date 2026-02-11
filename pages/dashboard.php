@@ -35,9 +35,13 @@ $listaPelisObj = crearPelis($listaPelis);
     </nav>
     <div class="container-xl contenedor">
 
-        <h3>Bienvenido <?php echo $_SESSION["userName"] ?></h3>
-        <p>Última conexión anterior: <?php echo $_COOKIE["last_activity"] ?></p>
-        <br>
+        <div class="d-flex justify-content-between">
+            <div>
+                <h3>Bienvenido <?php echo $_SESSION["userName"] ?></h3>
+                <p>Última conexión anterior: <?php echo $_COOKIE["last_activity"] ?></p>
+            </div>
+            <a class="boton-crear" href="./peli-create.php">Crear película +</a>
+        </div>
         <section class="pelis">
             <!-- recorro el array de objetos y voy creando un article para cada uno con los datos correspondientes -->
             <?php foreach ($listaPelisObj as $peli) { ?>
@@ -55,7 +59,7 @@ $listaPelisObj = crearPelis($listaPelis);
                             <!-- recorro el array del reparto y voy creando las tarjetas de los actores -->
                             <?php foreach ($peli->getReparto() as $actor) { ?>
                                 <div class="reparto__card">
-                                    <img class="reparto__img" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%2Fid%2FOIP.ZTsjuGIoVev4CnQDAw9DPQHaJ3%3Fpid%3DApi&f=1&ipt=afba98d9eee27342416583a239157ce3e6b51e5fdf81a8d18d340f4524f32d43" alt="">
+                                    <img class="reparto__img" src="<?php echo $actor->getfotografia() ?>" alt="">
                                     <p class="pelis__nombre-actor"><?php echo $actor->getnombre() ?></p>
                                     <p><?php echo $actor->getapellidos() ?></p>
                                 </div>

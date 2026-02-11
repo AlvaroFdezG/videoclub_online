@@ -19,7 +19,7 @@ $id_peli = $_GET["id_peli"];
     </nav>
     <div class="container-md m-auto login-container d-flex align-items-center justify-content-center w-100 contenedor">
         <div class="w-50 logout__card">
-            <p class="text-light logout__text">¿Estás seguro que quieres borrar la película?</p>
+            <p class="text-light logout__text">¿Estás seguro de que quieres borrar la película?</p>
             <div class="logout__links">
                 <a href="./dashboard.php" class="logout__link logout__link--volver">Volver</a>
                 <a href="<?php echo "./../scripts/borrarPeli.php?id_peli=$id_peli"?>" class="logout__link">Sí</a>
