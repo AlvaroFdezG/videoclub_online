@@ -41,7 +41,7 @@ function createTables()
         cartel VARCHAR(500) NOT NULL)";
 
         $actuan = "CREATE TABLE IF NOT EXISTS actuan (
-        id_pelicula INT NOT NULL,
+        id_pelicula AUTO_INCREMENT INT NOT NULL,
         id_actor INT NOT NULL,
         PRIMARY KEY (id_pelicula, id_actor),
         FOREIGN KEY (id_pelicula) REFERENCES peliculas(id) ON DELETE CASCADE,
@@ -192,7 +192,7 @@ function allActores()
         echo '<p class="error-message">Error en la base de datos: <strong>' . $e->getMessage() . '</strong></p>';
     }
 }
-function insertarPeli($titulo, $genero, $pais, $anyo, $cartel)
+function insertarPeli($titulo, $genero, $pais, $anyo, $cartel, $arrayActores)
 {
     $conex = "mysql:host=127.0.0.1;dbname=videoclub";
     $user = "root";
@@ -203,6 +203,12 @@ function insertarPeli($titulo, $genero, $pais, $anyo, $cartel)
         $sql = $bd->prepare("INSERT INTO peliculas (titulo, genero, pais, anyo, cartel) VALUES
         (':titulo', ':genero', ':pais', ':anyo', ':cartel')");
         $sql->execute([":titulo" => $titulo, ":genero" => $genero, ":pais" => $pais, ":anyo" => $anyo, ":cartel" => $cartel]);
+
+        foreach ($arrayActores as  $actor) {
+            $sqlActuan = $bd->prepare("INSERT INTO actuan (id_actor) VALUES
+            ('id_actor')");
+            $sqlActuan->execute([":id_actor" => $actor]);
+        }
 
         $bd = null;
     } catch (PDOException $e) {

@@ -27,6 +27,10 @@
                     <input required class="form-control" name="peli-genero" id="peli-genero" placeholder="Comedia, drama, acción...">
                 </div>
                 <div class="mb-3 w-75">
+                    <label for="peli-pais" class="form-label">País</label>
+                    <input required class="form-control" name="peli-pais" id="peli-pais" placeholder="Dónde se hizo">
+                </div>
+                <div class="mb-3 w-75">
                     <label for="peli-year" class="form-label">Año</label>
                     <input required class="form-control" name="peli-year" id="peli-year" placeholder="Año de estreno">
                 </div>

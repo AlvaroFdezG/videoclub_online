@@ -5,6 +5,7 @@ require("./../scripts/funciones.php");
 $listaActores = allActores();
 $_SESSION["peli-name"] = $_GET["peli-name"];
 $_SESSION["peli-genero"] = $_GET["peli-genero"];
+$_SESSION["peli-pais"] = $_GET["peli-pais"];
 $_SESSION["peli-year"] = $_GET["peli-year"];
 $_SESSION["peli-img"] = $_GET["peli-img"];
 ?>
@@ -35,7 +36,7 @@ $_SESSION["peli-img"] = $_GET["peli-img"];
                         <img class="reparto__img" src="<?php echo $actor["fotografia"] ?>" alt="">
                         <p class="pelis__nombre-actor"><?php echo $actor["nombre"] ?></p>
                         <p><?php echo $actor["apellidos"] ?></p>
-                        <input type="checkbox" name="actor[]" id="<?php echo $actor["id"] ?>" value="<?php echo $actor["id"] ?>">
+                        <input type="checkbox" name="actores[]" id="<?php echo $actor["id"] ?>" value="<?php echo $actor["id"] ?>">
                     </div>
                 <?php } ?>
                 <button type="submit" class="mt-5 btn btn-primary w-75">Acceder</button>
