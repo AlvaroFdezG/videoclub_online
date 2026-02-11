@@ -30,7 +30,7 @@ function createTables()
         id INT AUTO_INCREMENT PRIMARY KEY,
         nombre VARCHAR(100) NOT NULL,
         apellidos VARCHAR(100) NOT NULL,
-        fotografía VARCHAR(500) NOT NULL)";
+        fotografia VARCHAR(500) NOT NULL)";
 
         $peliculas = "CREATE TABLE IF NOT EXISTS peliculas(
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -51,7 +51,7 @@ function createTables()
         password VARCHAR(100) NOT NULL,
         rol VARCHAR(100) NOT NULL)";
 
-        $inserts = "INSERT INTO actores (nombre, apellidos, fotografía) VALUES
+        $inserts = "INSERT INTO actores (nombre, apellidos, fotografia) VALUES
         ('Leonardo', 'DiCaprio', 'dicaprio.jpg'),
         ('Scarlett', 'Johansson', 'johansson.jpg'),
         ('Brad', 'Pitt', 'pitt.jpg'),
@@ -89,7 +89,7 @@ function createTables()
         $bd->exec($actores);
         $bd->exec($actuan);
         $bd->exec($usuarios);
-        // $bd->exec($inserts);
+        $bd->exec($inserts);
 
         $bd = null;
     } catch (PDOException $e) {
@@ -136,7 +136,7 @@ function getPelis()
         echo '<p class="error-message">Error en la base de datos: <strong>' . $e->getMessage() . '</strong></p>';
     }
 }
-function getActores()
+function getActores($id_peli)
 {
     $conex = "mysql:host=127.0.0.1;dbname=videoclub";
     $user = "root";
@@ -144,11 +144,11 @@ function getActores()
 
     try {
         $bd = new PDO($conex, $user, $pass);
-        $sql = $bd->prepare("SELECT * FROM peliculas");
-        $sql->execute();
+        $sql = $bd->prepare("SELECT * FROM actores JOIN actuan ON id = id_actor WHERE id_pelicula like :id_peli");
+        $sql->execute([":id_peli" => $id_peli]);
 
-        $pelisData =  $sql->fetchAll(PDO::FETCH_ASSOC);
-        return $pelisData;
+        $listaActores =  $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $listaActores;
         $bd = null;
     } catch (PDOException $e) {
         echo '<p class="error-message">Error en la base de datos: <strong>' . $e->getMessage() . '</strong></p>';

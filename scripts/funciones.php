@@ -8,8 +8,27 @@ function crearPelis($listaPelis)
 
     foreach ($listaPelis as $peli) {
         $pelicula = new Pelicula($peli["id"], $peli["titulo"], $peli["genero"], $peli["pais"], $peli["anyo"], $peli["cartel"]);
+
+        // ejecuto función para obtener los actores y los añado a la película
+        $listaActores = getActores($peli["id"]);
+        // paso la función para crear el array de los objetos de los actores
+        $listaActoresObj = crearActores($listaActores);
+
+        $pelicula->setReparto($listaActoresObj);
         $listaPelisObj[] =  $pelicula;
     }
 
     return $listaPelisObj;
+}
+
+function crearActores($listaActores)
+{
+    $listaActoresObj = [];
+
+    foreach ($listaActores as $actor) {
+        $actor = new Actor($actor["id"], $actor["nombre"], $actor["apellidos"], $actor["fotografia"]);
+        $listaActoresObj[] =  $actor;
+    }
+
+    return $listaActoresObj;
 }

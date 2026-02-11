@@ -11,7 +11,7 @@ if (!isset($_SESSION["rol"])) {
 
 // obtengo el total de las películas
 $listaPelis = getPelis();
-// le paso a la función el array y las convierto a objetos
+// le paso a la función el array y las convierto a objetos, en esta función también se añade la lista de objetos de los actores a los objetos de películas
 $listaPelisObj = crearPelis($listaPelis);
 
 ?>
@@ -36,6 +36,7 @@ $listaPelisObj = crearPelis($listaPelis);
     <div class="container-xl contenedor">
 
         <h3>Bienvenido <?php echo $_SESSION["userName"] ?></h3>
+        <p>Última conexión anterior: <?php echo $_COOKIE["last_activity"] ?></p>
         <br>
         <section class="pelis">
             <!-- recorro el array de objetos y voy creando un article para cada uno con los datos correspondientes -->
@@ -47,6 +48,7 @@ $listaPelisObj = crearPelis($listaPelis);
                         <p class="pelis__genero"><?php echo $peli->getgenero() ?></p>
                         <p class="pelis__pais"><?php echo $peli->getpais() ?></p>
                         <p class="pelis__anyo"><?php echo $peli->getAnyo() ?></p>
+                        <?php print_r($peli->getReparto()) ?>
                     </div>
                     <!-- solo muestro los botones de editar y borrar si el usuario es admin -->
                     <?php if ($_SESSION["rol"] == 1) { ?>

@@ -14,7 +14,8 @@
     font-size: 3rem;
 }
 body {
-    background-color: rgb(41, 41, 41) !important;
+    background-color: rgb(41, 41, 41);
+    color: white;
 }
 
 .contenedor {

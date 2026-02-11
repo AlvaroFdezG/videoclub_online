@@ -23,6 +23,12 @@ class Pelicula
     {
         return $this->reparto;
     }
+
+    public function setReparto($reparto)
+    {
+        $this->reparto = $reparto;
+    }
+
     public function addReparto(Actor $actor)
     {
         $this->reparto[] = $actor;

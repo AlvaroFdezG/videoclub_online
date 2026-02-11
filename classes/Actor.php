@@ -6,17 +6,14 @@ class Actor
     private $apellidos;
     private $fotografia;
 
-    public function __construct($id,$nombre, $apellidos,$fotografia)
+    public function __construct($id, $nombre, $apellidos, $fotografia)
     {
         $this->id = $id;
         $this->nombre = $nombre;
         $this->apellidos = $apellidos;
         $this->fotografia = $fotografia;
     }
-    public function __destruct()
-    {
-        echo "Eliminado: " . $this->nombre;
-    }
+    public function __destruct() {}
 
 
 
@@ -62,7 +59,7 @@ class Actor
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -72,7 +69,7 @@ class Actor
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -82,7 +79,7 @@ class Actor
 
     /**
      * Get the value of fotografia
-     */ 
+     */
     public function getfotografia()
     {
         return $this->fotografia;
@@ -92,7 +89,7 @@ class Actor
      * Set the value of fotografia
      *
      * @return  self
-     */ 
+     */
     public function setfotografia($fotografia)
     {
         $this->fotografia = $fotografia;
