@@ -22,6 +22,10 @@ body {
     height: 100vh;
 }
 
+.contenedor-ancho{
+    padding-top: 80px;
+}
+
 .form__fieldset {
     background-color: var(--primary-purple);
     padding: 20px;

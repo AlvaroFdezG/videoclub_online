@@ -1,0 +1,25 @@
+.fielsdet-mail{
+    height: 700px !important;
+}
+.fielsdet-mail select{
+    background-color: rgba(0, 0, 0, 0.397);
+    border: none;
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+}
+.fieldset-mail input::placeholder{
+    color: gray;
+}
+.fielsdet-mail textarea{
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.397) !important;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    resize: none;
+}
+.fieldset-mail input:focus{
+    background-color: rgba(0, 0, 0, 0.397);
+    color: white;
+}

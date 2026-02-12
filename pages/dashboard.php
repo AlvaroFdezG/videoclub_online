@@ -33,7 +33,7 @@ $listaPelisObj = crearPelis($listaPelis);
         <h1 class="navbar-brand m-0 mx-3"><i class="fa-solid fa-film"></i> Videoclub online</h1>
         <a href="./confirm-logout.php" class="text-decoration-none text-danger logout">Cerrar sesión <i class="fa-solid fa-right-from-bracket"></i></a>
     </nav>
-    <div class="container-xl contenedor">
+    <div class="container-xl contenedor-ancho mb-5">
 
         <div class="d-flex justify-content-between">
             <div>
@@ -42,7 +42,12 @@ $listaPelisObj = crearPelis($listaPelis);
                     <p>Última conexión anterior: <?php echo $_COOKIE["last_activity"] ?></p>
                 <?php } ?>
             </div>
-            <a class="boton-crear" href="./peli-create.php">Crear película +</a>
+            <!-- Muestro un botón u otro dependiendo del rol -->
+            <?php if ($_SESSION["rol"] == 1) { ?>
+                <a class="boton-crear" href="./peli-create.php">Crear película +</a>
+            <?php } else { ?>
+                <a class="boton-crear" href="./form-mail.php">Enviar correo a administrador</a>
+            <?php } ?>
         </div>
         <section class="pelis">
             <!-- recorro el array de objetos y voy creando un article para cada uno con los datos correspondientes -->

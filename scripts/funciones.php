@@ -32,3 +32,13 @@ function crearActores($listaActores)
 
     return $listaActoresObj;
 }
+
+function writeLog($user, $info)
+{
+    $archivo = "./../logs/accesos.log";
+    $fecha = date("d-m-Y H:i:s");
+
+    $linea = "$user | $fecha | $info" . PHP_EOL;
+
+    file_put_contents($archivo, $linea, FILE_APPEND);
+}

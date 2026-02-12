@@ -79,7 +79,7 @@ $allActores = allActores();
                 </div>
                 <div class="d-flex align-middle justify-content-evenly w-100 mt-5">
                     <a href="./dashboard.php" class="btn btn-primary w-25">Volver</a>
-                    <button type="submit" class="btn btn-primary w-25">Siguiente</button>
+                    <button type="submit" class="btn btn-primary w-25">Aceptar</button>
                 </div>
             </fieldset>
         </form>
