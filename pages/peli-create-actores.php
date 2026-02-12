@@ -43,7 +43,7 @@ $_SESSION["peli-img"] = $_POST["peli-img"];
                         <input type="checkbox" name="actores[]" id="<?php echo $actor["id"] ?>" value="<?php echo $actor["id"] ?>">
                     </div>
                 <?php } ?>
-                <button type="submit" class="mt-5 btn btn-primary w-75">Acceder</button>
+                <button type="submit" class="mt-5 btn btn-primary w-100">Confirmar</button>
             </fieldset>
         </form>
     </div>

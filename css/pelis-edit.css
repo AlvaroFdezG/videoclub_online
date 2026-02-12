@@ -1,0 +1,38 @@
+.pelis__reparto-edit{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.fieldet-edit{
+    background-color: rgba(47, 4, 88, 0.404);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.fieldet-edit input{
+    background-color: rgba(0, 0, 0, 0.397);
+    border: none;
+    color: white;
+}
+.fieldet-edit input::placeholder{
+    color: gray;
+}
+.fieldet-edit input:focus{
+    background-color: rgba(0, 0, 0, 0.397);
+    color: white;
+}
+.container-edit{
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    padding: 80px;
+    padding-bottom: 80px;
+}

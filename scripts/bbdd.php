@@ -138,6 +138,24 @@ function getPelis()
         echo '<p class="error-message">Error en la base de datos: <strong>' . $e->getMessage() . '</strong></p>';
     }
 }
+function getOnePeli($id_peli)
+{
+    $conex = "mysql:host=127.0.0.1;dbname=videoclub";
+    $user = "root";
+    $pass = "";
+
+    try {
+        $bd = new PDO($conex, $user, $pass);
+        $sql = $bd->prepare("SELECT * FROM peliculas WHERE id=:id_peli");
+        $sql->execute([":id_peli" => $id_peli]);
+
+        $peliData =  $sql->fetch(PDO::FETCH_ASSOC);
+        return $peliData;
+        $bd = null;
+    } catch (PDOException $e) {
+        echo '<p class="error-message">Error en la base de datos: <strong>' . $e->getMessage() . '</strong></p>';
+    }
+}
 function getActores($id_peli)
 {
     $conex = "mysql:host=127.0.0.1;dbname=videoclub";
@@ -208,6 +226,30 @@ function insertarPeli($titulo, $genero, $pais, $anyo, $cartel, $arrayActores)
         $id_peli = $bd->lastInsertId();
 
         // recorro los id de los actores que el usuario ha seleccionado en los checks de la página de peli-create-actores
+        $sqlActuan = $bd->prepare("INSERT INTO actuan (id_pelicula, id_actor) VALUES
+            (:id_pelicula , :id_actor)");
+        foreach ($arrayActores as  $actor) {
+            $sqlActuan->execute([":id_pelicula" => $id_peli, ":id_actor" => $actor]);
+        }
+
+        $bd = null;
+    } catch (PDOException $e) {
+        echo '<p class="error-message">Error en la base de datos: <strong>' . $e->getMessage() . '</strong></p>';
+    }
+}
+
+function insertarPeliEdit($id_peli, $titulo, $genero, $pais, $anyo, $cartel, $arrayActores)
+{
+    $conex = "mysql:host=127.0.0.1;dbname=videoclub";
+    $user = "root";
+    $pass = "";
+
+    try {
+        $bd = new PDO($conex, $user, $pass);
+        $sql = $bd->prepare("INSERT INTO peliculas (id, titulo, genero, pais, anyo, cartel) 
+        VALUES (:id, :titulo, :genero, :pais, :anyo, :cartel)");
+        $sql->execute([":id" => $id_peli, ":titulo" => $titulo, ":genero" => $genero, ":pais" => $pais, ":anyo" => $anyo, ":cartel" => $cartel]);
+
         $sqlActuan = $bd->prepare("INSERT INTO actuan (id_pelicula, id_actor) VALUES
             (:id_pelicula , :id_actor)");
         foreach ($arrayActores as  $actor) {

@@ -74,7 +74,7 @@ $listaPelisObj = crearPelis($listaPelis);
 
                         <!-- a los enlaces les creo una variable que paso por get con el id de la película que se está iterando -->
                         <div class="pelis__botones">
-                            <a class="pelis__enlace" href="./editar.php?id_peli=<?php echo $peli->getId() ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a class="pelis__enlace" href="./peli-edit.php?id_peli=<?php echo $peli->getId() ?>"><i class="fa-solid fa-pen-to-square"></i></a>
                             <a class="pelis__enlace --borrar" href="./confirm-delete.php?id_peli=<?php echo $peli->getId() ?>"><i class="fa-solid fa-trash-can"></i></a>
                         </div>
 
