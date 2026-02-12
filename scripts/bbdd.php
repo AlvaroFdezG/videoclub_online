@@ -41,7 +41,7 @@ function createTables()
         cartel VARCHAR(500) NOT NULL)";
 
         $actuan = "CREATE TABLE IF NOT EXISTS actuan (
-        id_pelicula AUTO_INCREMENT INT NOT NULL,
+        id_pelicula INT NOT NULL,
         id_actor INT NOT NULL,
         PRIMARY KEY (id_pelicula, id_actor),
         FOREIGN KEY (id_pelicula) REFERENCES peliculas(id) ON DELETE CASCADE,
@@ -201,13 +201,17 @@ function insertarPeli($titulo, $genero, $pais, $anyo, $cartel, $arrayActores)
     try {
         $bd = new PDO($conex, $user, $pass);
         $sql = $bd->prepare("INSERT INTO peliculas (titulo, genero, pais, anyo, cartel) VALUES
-        (':titulo', ':genero', ':pais', ':anyo', ':cartel')");
+        (:titulo, :genero, :pais, :anyo, :cartel)");
         $sql->execute([":titulo" => $titulo, ":genero" => $genero, ":pais" => $pais, ":anyo" => $anyo, ":cartel" => $cartel]);
 
+        // con esta función de PDO obtengo el id de la película que se acaba de insertar, ya que al ser auto incremental no se cuál es
+        $id_peli = $bd->lastInsertId();
+
+        // recorro los id de los actores que el usuario ha seleccionado en los checks de la página de peli-create-actores
+        $sqlActuan = $bd->prepare("INSERT INTO actuan (id_pelicula, id_actor) VALUES
+            (:id_pelicula , :id_actor)");
         foreach ($arrayActores as  $actor) {
-            $sqlActuan = $bd->prepare("INSERT INTO actuan (id_actor) VALUES
-            ('id_actor')");
-            $sqlActuan->execute([":id_actor" => $actor]);
+            $sqlActuan->execute([":id_pelicula" => $id_peli, ":id_actor" => $actor]);
         }
 
         $bd = null;

@@ -38,7 +38,9 @@ $listaPelisObj = crearPelis($listaPelis);
         <div class="d-flex justify-content-between">
             <div>
                 <h3>Bienvenido <?php echo $_SESSION["userName"] ?></h3>
-                <p>Última conexión anterior: <?php echo $_COOKIE["last_activity"] ?></p>
+                <?php if (isset($_COOKIE["last_activity"])) { ?>
+                    <p>Última conexión anterior: <?php echo $_COOKIE["last_activity"] ?></p>
+                <?php } ?>
             </div>
             <a class="boton-crear" href="./peli-create.php">Crear película +</a>
         </div>

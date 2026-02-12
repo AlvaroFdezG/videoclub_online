@@ -3,11 +3,15 @@ require("./../scripts/bbdd.php");
 require("./../scripts/funciones.php");
 
 $listaActores = allActores();
-$_SESSION["peli-name"] = $_GET["peli-name"];
-$_SESSION["peli-genero"] = $_GET["peli-genero"];
-$_SESSION["peli-pais"] = $_GET["peli-pais"];
-$_SESSION["peli-year"] = $_GET["peli-year"];
-$_SESSION["peli-img"] = $_GET["peli-img"];
+
+session_start();
+
+$_SESSION["peli-name"] = $_POST["peli-name"];
+$_SESSION["peli-genero"] = $_POST["peli-genero"];
+$_SESSION["peli-pais"] = $_POST["peli-pais"];
+$_SESSION["peli-year"] = $_POST["peli-year"];
+$_SESSION["peli-img"] = $_POST["peli-img"];
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
